@@ -19,4 +19,10 @@ USER nodeapp
 EXPOSE 3000
 
 ENTRYPOINT ["/sbin/tini", "--"]
-CMD ["node", "server.js"]
+
+RUN npm run build
+
+RUN cp -r .next/static .next/standalone/.next/ \
+	&& cp -r public .next/standalone/
+
+CMD ["node", ".next/standalone/server.js"]
