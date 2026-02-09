@@ -8,10 +8,17 @@ WORKDIR /app
 
 COPY package*.json ./
 
-RUN if [ -f package-lock.json ]; then npm ci; else npm install; fi
+RUN npm ci --include=dev
 
 COPY server.js ./
 COPY public ./public
+COPY tailwind ./tailwind
+COPY tailwind/tailwind.config.js ./
+
+RUN npm run tw:build
+#temp
+RUN ls -la node_modules/.bin && (ls -la node_modules/.bin/tailwindcss || true)
+
 
 RUN chown -R nodeapp:nodeapp /app
 USER nodeapp

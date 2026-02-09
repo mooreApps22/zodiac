@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: "Science Gothic", sans-serif;
+}
+
+.zodiac-ring{
+	--ring-rot: 0deg;
+	position: relative;
+	width: 360px;
+	height: 360px;
+	border-radius: 50%;
+	margin: 100px auto;
+	margin-bottom: 20px;
+	transform-origin: 50% 50%;
+	transform: rotate(var(--ring-rot));
+	transition: transform 600ms ease;
+	outline: none;
+}
+
+.zodiac{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	font-size: 40px;
+	line-height: 1;
+	user-select: none;
+	padding: 6px;
+	border-radius: 10px;
+	cursor: pointer;
+	background: none;
+	border: none;
+	color: inherit;
+}
+
+.ring:focus,
+.ring:focus-visible, 
+.zodiac:focus,
+.zodiac:focus-visible {
+	outline: none;
+	box-shadow: none;
+}
+
+.glyph{
+	display: inline-block;
+	transform: rotate(calc(var(--ring-rot) * -1));
+}

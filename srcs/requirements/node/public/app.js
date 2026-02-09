@@ -45,10 +45,11 @@ function buildRing() {
 		glyph.textContent = item.symbol;
 
 		btn.appendChild(glyph);
-		btn.addEventListener("click", () => {
+		btn.addEventListener("click", (e) => {
 			const rot = 90 - deg;
 			setRingRotation(rot);
 			signName.textContent = item.name;
+			e.currentTarget.blur(); // tmp
 		});
 		ring.appendChild(btn);
 	});
