@@ -6,23 +6,18 @@ RUN addgroup -S nodeapp && adduser -S -G nodeapp nodeapp
 
 WORKDIR /app
 
-COPY app/package*.json ./
+COPY package*.json ./
 
 RUN if [ -f package-lock.json ]; then npm ci; else npm install; fi
 
-COPY app/ ./
+COPY server.js ./
+COPY public ./public
 
 RUN chown -R nodeapp:nodeapp /app
-
 USER nodeapp
 
 EXPOSE 3000
 
 ENTRYPOINT ["/sbin/tini", "--"]
 
-RUN npm run build
-
-RUN cp -r .next/static .next/standalone/.next/ \
-	&& cp -r public .next/standalone/
-
-CMD ["node", ".next/standalone/server.js"]
+CMD ["npm", "start"]
